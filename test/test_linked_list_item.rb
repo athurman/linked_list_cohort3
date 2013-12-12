@@ -75,4 +75,11 @@ class LinkedListItemTest < NSS::TestCase
     assert lli1 < lli2
     assert lli2 > lli1
   end
+
+  def test_05f_comparator_integer_string
+    lli1 = LinkedListItem.new(:apple)
+    lli2 = LinkedListItem.new(:banana)
+    assert lli1 < lli2
+    assert lli2 > lli1
+  end
 end
