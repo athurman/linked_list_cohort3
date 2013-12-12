@@ -2,10 +2,12 @@ require 'linked_list_item'
 
 class LinkedList
   attr_reader :items
+  attr_reader :size
+  attr_reader :last
 
   def initialize *payloads
     @first_node = nil
-
+    @size = 0
   end
 
   def add_item payload
@@ -16,6 +18,7 @@ class LinkedList
       while node.next_list_item != nil do
         node = node.next_list_item
       end
+
       node.next_list_item = LinkedListItem.new(payload)
     end
   end
@@ -30,5 +33,34 @@ class LinkedList
       node = node.next_list_item
     end
     return node.payload
+  end
+
+  def size
+    size = 0
+    node = @first_node
+
+    unless node.nil?
+      size = 1
+      while node.next_list_item != nil do
+        size = size + 1
+        node = node.next_list_item
+      end
+    end
+
+    @size = size
+  end
+
+  def last
+    node = @first_node
+
+    if node.nil?
+      @last = nil
+    else
+      while node.next_list_item != nil do
+        node = node.next_list_item
+      end
+      @last = node.payload
+    end
+
   end
 end
