@@ -20,12 +20,14 @@ class LinkedListItem
     @next_list_item.nil?
   end
 
-  def <=>(other_linked_list_item)
-    self.payload.to_s <=> other_linked_list_item.payload.to_s
+  def <=> other_linked_list_item
+    return 1 if self.payload.is_a?(Symbol) && other_linked_list_item.payload.is_a?(String)
+    return -1 if self.payload.is_a?(String) && other_linked_list_item.payload.is_a?(Symbol)
+    self.payload <=> other_linked_list_item.payload
   end
 
   def === linked_list_item
-    if self.object_id.to_s == linked_list_item.object_id.to_s
+    if self.object_id == linked_list_item.object_id
       true
     end
   end
