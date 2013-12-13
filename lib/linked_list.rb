@@ -61,6 +61,22 @@ class LinkedList
       end
       @last = node.payload
     end
+  end
 
+  # def print_payloads *payloads
+  #   payloads.each{|payload| "#{payload}, "}
+  # end
+
+  def to_s
+    node = @first_node
+    return "| |" if node.nil?
+
+    first = node.payload
+    while node.next_list_item != nil do
+      node = node.next_list_item
+      first << ", " + node.payload
+    end
+
+    return "| " + first + " |"
   end
 end
