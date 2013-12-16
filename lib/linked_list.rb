@@ -8,6 +8,8 @@ class LinkedList
   def initialize *payloads
     @first_node = nil
     @size = 0
+
+    payloads.each{|payload| @first_node = LinkedListItem.new(payload)}
   end
 
   def add_item payload
