@@ -8,7 +8,6 @@ class LinkedList
   def initialize *payloads
     @first_node = nil
     @size = 0
-
     payloads.each{|payload| add_item(payload)}
   end
 
@@ -43,7 +42,6 @@ class LinkedList
 
   def []= index, payload
     raise IndexError if index < 0
-
     node = @first_node
     for i in 0...index
       raise IndexError if node.nil?
@@ -80,7 +78,6 @@ class LinkedList
   def to_s
     node = @first_node
     return "| |" if node.nil?
-
     first = node.payload
     until node.last? do
       node = node.next_list_item
@@ -96,9 +93,7 @@ class LinkedList
     until node.last? do
       previous_node = node
       node = node.next_list_item
-      if previous_node > node
-        return false
-      end
+      return false if previous_node > node
     end
     return true if node == @first_node
     return true if previous_node <= node
