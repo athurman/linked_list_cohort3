@@ -121,8 +121,8 @@ class LinkedList
   def sort
     return self if @first_node.nil?
     until self.sorted? do
-      node = @first_node
-      until node.last? do
+      node = @first_node #This line resets the Linked List to run through again.
+      until node.last? do #Nested loop goes through until full list is sorted.
         item1 = node
         item2 = node.next_list_item
         node = node.next_list_item
