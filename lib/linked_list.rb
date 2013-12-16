@@ -123,8 +123,25 @@ class LinkedList
       previous_node.next_list_item = node.next_list_item
       node.next_list_item = nil
     end
-
   end
 
+  def indexOf payload
+    node = @first_node
+
+    i = 0
+    while node.next_list_item != nil do
+      return nil if node.nil?
+      if node.payload == payload
+        return i
+      else
+        node = node.next_list_item
+        i += 1
+      end
+    end
+
+    if node.payload == payload
+      return i
+    end
+  end
 
 end
