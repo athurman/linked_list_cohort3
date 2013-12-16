@@ -1,4 +1,4 @@
-require 'nss'
+# require 'nss'
 require 'linked_list'
 
 class LinkedListTest < Test::Unit::TestCase

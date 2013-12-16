@@ -9,17 +9,7 @@ class LinkedList
     @first_node = nil
     @size = 0
 
-    payloads.each{|payload|
-      if @first_node.nil?
-        @first_node = LinkedListItem.new(payload)
-      else
-        node = @first_node
-        until node.next_list_item.nil? do
-          node = node.next_list_item
-        end
-        node.next_list_item = LinkedListItem.new(payload)
-      end
-      }
+    payloads.each{|payload| add_item(payload)}
   end
 
   def add_item payload
@@ -27,12 +17,12 @@ class LinkedList
       @first_node = LinkedListItem.new(payload)
     else
       node = @first_node
-      until node.next_list_item.nil? do
+      until node.last? do
         node = node.next_list_item
       end
-
       node.next_list_item = LinkedListItem.new(payload)
     end
+    @size += 1
   end
 
   def get index
@@ -48,7 +38,7 @@ class LinkedList
   end
 
   def [] index
-    self.get(index) # The keyword self in Ruby gives you access to the current object
+    get(index)
   end
 
   def []= index, payload
@@ -62,18 +52,16 @@ class LinkedList
     node.payload = payload
   end
 
-  def size
-    size = 0
+  def indexOf payload
     node = @first_node
-
-    unless node.nil?
-      size = 1
-      until node.next_list_item.nil? do
-        size = size + 1
-        node = node.next_list_item
-      end
+    return nil if node.nil?
+    i = 0
+    until node.payload == payload do
+      return nil if node.last?
+      node = node.next_list_item
+      i += 1
     end
-    @size = size
+    i
   end
 
   def last
@@ -82,7 +70,7 @@ class LinkedList
     if node.nil?
       @last = nil
     else
-      until node.next_list_item.nil? do
+      until node.last? do
         node = node.next_list_item
       end
       @last = node.payload
@@ -94,47 +82,44 @@ class LinkedList
     return "| |" if node.nil?
 
     first = node.payload
-    until node.next_list_item.nil? do
+    until node.last? do
       node = node.next_list_item
       first << ", " + node.payload
     end
     return "| " + first + " |"
   end
 
+  def sorted?
+    node = @first_node
+    return true if node.nil?
+
+    until node.last? do
+      previous_node = node
+      node = node.next_list_item
+      if previous_node > node
+        return false
+      end
+    end
+    return true if node == @first_node
+    return true if previous_node <= node
+  end
+
   def remove index
-    raise IndexError if index < 0
+    raise IndexError if index < 0 or @first_node.nil?
     node = @first_node
 
     if index == 0
       @first_node = node.next_list_item
     else
-      for i in 0...index
+      (index - 1).times do
         raise IndexError if node.nil?
         previous_node = node
         node = node.next_list_item
       end
       # Get the previous node to point to the next list item after it,
       # in order to "remove it"
-      previous_node.next_list_item = node.next_list_item
-      node.next_list_item = nil
+      node.next_list_item = node.next_list_item.next_list_item
     end
+    @size -= 1
   end
-
-  def indexOf payload
-
-    node = @first_node
-    return nil if node.nil?
-    i = 0
-
-    until node.next_list_item.nil? do
-      return nil if node.nil?
-      break if node.payload == payload
-
-      node = node.next_list_item
-      i += 1
-    end
-
-    return i if node.payload == payload
-  end
-
 end
