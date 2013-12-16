@@ -138,10 +138,7 @@ class LinkedList
         i += 1
       end
     end
-
-    if node.payload == payload
-      return i
-    end
+    return i if node.payload == payload
   end
 
 end
