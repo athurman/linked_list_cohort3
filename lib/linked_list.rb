@@ -78,10 +78,10 @@ class LinkedList
   def to_s
     node = @first_node
     return "| |" if node.nil?
-    first = node.payload
+    first = node.payload.to_s
     until node.last? do
       node = node.next_list_item
-      first << ", " + node.payload
+      first = first + ", #{node.payload}"
     end
     return "| " + first + " |"
   end
@@ -117,4 +117,21 @@ class LinkedList
     end
     @size -= 1
   end
+
+  def sort
+    return self if @first_node.nil?
+    until self.sorted? do
+      node = @first_node
+      until node.last? do
+        item1 = node
+        item2 = node.next_list_item
+        node = node.next_list_item
+        if item1 > item2
+          item1.payload, item2.payload = item2.payload, item1.payload
+        end
+      end
+    end
+    self
+  end
+
 end
