@@ -109,13 +109,21 @@ class LinkedList
 
   def remove index
     raise IndexError if index < 0
-
     node = @first_node
-    for i in 0...index
-      raise IndexError if node.nil?
-      node = node.next_list_item
+
+    if index == 0
+      @first_node = node.next_list_item
+    else
+      for i in 0...index
+        raise IndexError if node.nil?
+        previous_node = node
+        node = node.next_list_item
+      end
+      # Get the previous node to point to the next list item after it, in order to "remove it"
+      previous_node.next_list_item = node.next_list_item
+      node.next_list_item = nil
     end
-    # Get the previous node to equal nil in order to remove the indexed node.
+
   end
 
 
