@@ -134,4 +134,17 @@ class LinkedList
     self
   end
 
+  def swap_with_next index
+    node = @first_node
+    if index == 0
+      node.payload, node.next_list_item.payload = node.next_list_item.payload, node.payload
+    else
+      index.times do
+        node = node.next_list_item
+      end
+      raise IndexError if node.last?
+      node.payload, node.next_list_item.payload = node.next_list_item.payload, node.payload
+    end
+  end
+
 end
