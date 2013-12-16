@@ -14,7 +14,7 @@ class LinkedList
         @first_node = LinkedListItem.new(payload)
       else
         node = @first_node
-        while node.next_list_item != nil do
+        until node.next_list_item.nil? do
           node = node.next_list_item
         end
         node.next_list_item = LinkedListItem.new(payload)
@@ -27,7 +27,7 @@ class LinkedList
       @first_node = LinkedListItem.new(payload)
     else
       node = @first_node
-      while node.next_list_item != nil do
+      until node.next_list_item.nil? do
         node = node.next_list_item
       end
 
@@ -68,7 +68,7 @@ class LinkedList
 
     unless node.nil?
       size = 1
-      while node.next_list_item != nil do
+      until node.next_list_item.nil? do
         size = size + 1
         node = node.next_list_item
       end
@@ -82,23 +82,19 @@ class LinkedList
     if node.nil?
       @last = nil
     else
-      while node.next_list_item != nil do
+      until node.next_list_item.nil? do
         node = node.next_list_item
       end
       @last = node.payload
     end
   end
 
-  # def print_payloads *payloads
-  #   payloads.each{|payload| "#{payload}, "}
-  # end
-
   def to_s
     node = @first_node
     return "| |" if node.nil?
 
     first = node.payload
-    while node.next_list_item != nil do
+    until node.next_list_item.nil? do
       node = node.next_list_item
       first << ", " + node.payload
     end
@@ -124,11 +120,12 @@ class LinkedList
   end
 
   def indexOf payload
+
     node = @first_node
     return nil if node.nil?
     i = 0
 
-    while node.next_list_item != nil do
+    until node.next_list_item.nil? do
       return nil if node.nil?
       if node.payload == payload
         return i
