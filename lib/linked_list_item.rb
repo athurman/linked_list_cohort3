@@ -13,7 +13,7 @@ class LinkedListItem
   end
 
   def next_list_item= next_list_item
-    if next_list_item.is_a?(LinkedListItem) && next_list_item != self
+    if next_list_item != self
         @next_list_item = next_list_item
     else
       raise ArgumentError

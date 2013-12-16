@@ -113,9 +113,10 @@ class LinkedList
     node = @first_node
     for i in 0...index
       raise IndexError if node.nil?
-
       node = node.next_list_item
     end
+    # Get the previous node to equal nil in order to remove the indexed node.
   end
+
 
 end
