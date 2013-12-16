@@ -8,6 +8,10 @@ class LinkedListItem
     @next_list_item = nil
   end
 
+  def payload= payload
+    @payload = payload
+  end
+
   def next_list_item= next_list_item
     if next_list_item.is_a?(LinkedListItem) && next_list_item != self
         @next_list_item = next_list_item

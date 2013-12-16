@@ -47,6 +47,21 @@ class LinkedList
     return node.payload
   end
 
+  def [] index
+    self.get(index) # The keyword self in Ruby gives you access to the current object
+  end
+
+  def []= index, payload
+    raise IndexError if index < 0
+
+    node = @first_node
+    for i in 0...index
+      raise IndexError if node.nil?
+      node = node.next_list_item
+    end
+    node.payload = payload
+  end
+
   def size
     size = 0
     node = @first_node
@@ -91,4 +106,16 @@ class LinkedList
 
     return "| " + first + " |"
   end
+
+  def remove index
+    raise IndexError if index < 0
+
+    node = @first_node
+    for i in 0...index
+      raise IndexError if node.nil?
+
+      node = node.next_list_item
+    end
+  end
+
 end
