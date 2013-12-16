@@ -9,7 +9,17 @@ class LinkedList
     @first_node = nil
     @size = 0
 
-    payloads.each{|payload| @first_node = LinkedListItem.new(payload)}
+    payloads.each{|payload|
+      if @first_node.nil?
+        @first_node = LinkedListItem.new(payload)
+      else
+        node = @first_node
+        while node.next_list_item != nil do
+          node = node.next_list_item
+        end
+        node.next_list_item = LinkedListItem.new(payload)
+      end
+      }
   end
 
   def add_item payload
