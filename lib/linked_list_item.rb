@@ -25,12 +25,10 @@ class LinkedListItem
   end
 
   def <=> other_linked_list_item
-    return 1 if self.payload.is_a?(Symbol) && other_linked_list_item.payload.is_a?(String)
-    return -1 if self.payload.is_a?(String) && other_linked_list_item.payload.is_a?(Symbol)
-    return -1 if self.payload.is_a?(Fixnum) && other_linked_list_item.payload.is_a?(String)
-    return 1 if self.payload.is_a?(String) && other_linked_list_item.payload.is_a?(Fixnum)
-    return -1 if self.payload.is_a?(Fixnum) && other_linked_list_item.payload.is_a?(Symbol)
-    return 1 if self.payload.is_a?(Symbol) && other_linked_list_item.payload.is_a?(Fixnum)
+    return 1 if self.payload.is_a?(Symbol) && !other_linked_list_item.payload.is_a?(Symbol)
+    return -1 if !self.payload.is_a?(Symbol) && other_linked_list_item.payload.is_a?(Symbol)
+    return -1 if self.payload.is_a?(Fixnum) && !other_linked_list_item.payload.is_a?(Fixnum)
+    return 1 if !self.payload.is_a?(Fixnum) && other_linked_list_item.payload.is_a?(Fixnum)
     self.payload <=> other_linked_list_item.payload
   end
 

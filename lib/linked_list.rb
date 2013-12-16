@@ -73,7 +73,6 @@ class LinkedList
         node = node.next_list_item
       end
     end
-
     @size = size
   end
 
@@ -103,7 +102,6 @@ class LinkedList
       node = node.next_list_item
       first << ", " + node.payload
     end
-
     return "| " + first + " |"
   end
 
@@ -127,8 +125,9 @@ class LinkedList
 
   def indexOf payload
     node = @first_node
-
+    return nil if node.nil?
     i = 0
+
     while node.next_list_item != nil do
       return nil if node.nil?
       if node.payload == payload
